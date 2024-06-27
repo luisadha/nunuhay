@@ -1,4 +1,6 @@
 # nunuhay
+Project sederhana tabel barang support CLI & Web
+
 # The correct path
 * /data/data/com.termux/files/usr/bin/nunuhay
 *  /data/data/com.termux/files/usr/bin/libnunuhay.py
@@ -28,3 +30,9 @@ Choose
 
 2. Jalankan_server
 
+# PHP Server using [[Zhell Server](https://github.com/Teams-of-Termux-Indonesia/ZhellServer)]
+
+# Made with love
+- python
+- shell
+- php
