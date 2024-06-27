@@ -24,6 +24,13 @@ $ nunuhay
 
 ## 2. Termux widget
 
+```bash
+git clone https://github.com/luisadha/nunuhay.git
+cd nunuhay
+bash ./install.sh
+```
+Close the termux app then create an widget on Home
+
 Choose 
 
 1. Ubah_data_barang
