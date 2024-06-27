@@ -7,19 +7,24 @@ import json
 import time
 import csv 
 
+
 dasar_price = float(6000.0)
 nyilang_price = float(7000.0)
 mateni_price = float(8000.0)
 full_price = float(21000.0)
+
 if len(sys.argv) < 5:
     print("Argument required!")
     print("   Argumen 1 = Dasar \n   Argumen 2 = Nyilang\n   Argumen 3 Mateni\n   Argumen 4 = Full")
-    sys.exit()
+    sys.exit(1)
+
+
 def borongan(nunuhay, dasar=None, nyilang=None, mateni=None, full=None):   
     global dasar_price, nyilang_price, mateni_price, full_price
     return {  
             "+": lambda: dasar_price * float(dasar) + nyilang_price * float(nyilang) + mateni_price * float(mateni) + full_price * float(full)
 }.get(nunuhay, lambda: "Gak ngambil barang")()
+global t, idr_convert
 t = borongan("+", sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
 a = sys.argv[1]
 b = sys.argv[2]
@@ -43,19 +48,25 @@ table = tabulate(data, headers=headers, tablefmt="fancy_grid")
 
 def tabel_choice():
     print(table);
-    print(f"Total dgn. module :", idr_convert);
+    with open('nunuhay_data.table', 'w', encoding='utf-8') as tabf:
+        tabf.write(f"\n{table}")
+        print(f"Total dgn. module :", idr_convert);
+    
     print(f"Total dgn. manual : Rp. {t:.2f}");
 
 def csv_choice():
     df = pd.DataFrame(data, columns=headers)
-    df.to_csv('table_data.csv', index=False)
+    df.to_csv('nunuhay_data.csv', index=False)
     print(df)
+    print("\n")
+    print(f"Total dgn. module :", idr_convert);
 
 def json_choice():
-    dr = pd.read_csv('table_data.csv')  
+    dr = pd.read_csv('nunuhay_data.csv')  
     json_data = dr.to_json(orient='records')
     print(json_data)
-
+    print("\n")
+    print(f"Total dgn. module :", idr_convert);
 
 def csv_to_json(csvFilePath, jsonFilePath):
     jsonArray = []
@@ -70,13 +81,13 @@ def csv_to_json(csvFilePath, jsonFilePath):
         jsonString = json.dumps(jsonArray, indent=4)
         jsonf.write(jsonString)
           
-csvFilePath = r'table_data.csv'
-jsonFilePath = r'json_data.json'
-
-
+csvFilePath = r'nunuhay_data.csv'
+jsonFilePath = r'nunuhay_data.json'
 
 if __name__=='__main__':
+
     start = time.perf_counter() 
-    csv_to_json(csvFilePath, jsonFilePath)
+    json_choice()
     finish = time.perf_counter()
+    print("\n");
     print(f"Conversion 100.000 rows completed successfully in {finish - start:0.4f} seconds")

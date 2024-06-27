@@ -1,0 +1,82 @@
+#!/data/data/com.termux/files/usr/bin/python3 
+# interactive_script.py
+from babel.numbers import format_currency
+import subprocess
+import sys
+import libnunuhay as nunu
+import os
+import time
+import pandas as pd
+
+def main_menu():
+    
+    print(f"=====================================")
+    print(f"=====  NUNUHAY INVOICE RATTAN  ======")
+    print(f"=====================================")
+    print("Pilih tampilan invoice: ")
+    print(" 1. Ubah ke tabel")
+    print(" 2. Ubah ke csv")
+    print(" 3. Ubah ke json")
+    print(" 4. Ubah ke csv dengan total")
+    print(" 5. Keluar")
+
+    try:
+        choice = int(input("\nKonfirmasi pilihan: \n"))
+    except ValueError:
+        print("\nMasukkan angka yang benar!.\n")
+        return True
+
+    if choice == 1:
+        print("\n")
+        start = time.perf_counter()
+        nunu.tabel_choice()
+        finish = time.perf_counter()
+        print(f"\nConversion completed in {finish - start} seconds\n")
+        print("\n")
+    elif choice == 2:
+        print("\n")
+        start = time.perf_counter()
+        nunu.csv_choice()
+        
+        finish = time.perf_counter()
+        print(f"\nConversion completed in {finish - start} seconds\n")
+        print("\n")
+    elif choice == 3:
+        print("\n")
+        start = time.perf_counter()
+        nunu.csv_to_json(nunu.csvFilePath, nunu.jsonFilePath)
+        with open(nunu.jsonFilePath, 'r') as f:
+            opening_json = f.read()
+            print(opening_json)
+            print(f"\nTotal dgn. module :", nunu.idr_convert)
+            finish = time.perf_counter()
+            print(f"\nConversion completed in {finish - start} seconds\n")
+        print("\n")
+    elif choice == 4:
+        df = pd.read_csv('nunuhay_data.csv', delimiter=',')
+        # Cek nama kolom
+        print("Kolom yang ditemukan:", df.columns)
+        # Hapus spasi atau karakter tambahan dari nama kolom
+        df.columns = df.columns.str.strip()
+        # Bersihkan kolom Harga dan ubah ke format numerik
+        df['Harga'] = df['Harga'].str.replace("Rp", "").str.replace(".", "").str.replace(",", ".").astype(float)
+        # Hitung total untuk setiap baris
+        df['Total'] = df['Harga'] * df['Qty']
+        # Hitung jumlah total keseluruhan
+        total_sum = df['Total'].sum()
+        # Tambahkan kolom baru dengan total keseluruhan
+        df['Total Keseluruhan'] = total_sum
+        # Simpan DataFrame ke file CSV baru atau yang sama
+        df.to_csv('nunuhay_data_total.csv', index=False)
+        print("Data dengan kolom total telah disimpan ke file 'nunuhay_data_total.csv'.")
+    elif choice == 5:
+        print("\nExiting...")
+        return False
+    else:
+        print("\nPilihan salah!.\n")
+    
+    return True
+
+if __name__ == "__main__":
+    while main_menu():
+        pass
