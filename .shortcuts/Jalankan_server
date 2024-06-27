@@ -1,3 +1,3 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-. ~/.profile && nunuhay ${nunuhay[@]} && php -S localhost:8000 -t /sdcard/htdocs/:
+. ~/.profile && nunuhay ${nunuhay[@]} && php -S localhost:8000 -t ~/storage/shared/htdocs/
