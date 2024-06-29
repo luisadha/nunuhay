@@ -31,7 +31,7 @@ bash ./install.sh
 ```
 Close the termux app then create an widget on Home
 
-Choose 
+Touch 
 
 1. Ubah_data_barang
 
