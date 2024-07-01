@@ -1,0 +1,19 @@
+{
+  "categories": [
+    {
+      "id": "2b2a4a9a-3100-4938-a3f7-8bb8475d638c",
+      "name": "Pintasan",
+      "shortcuts": [
+        {
+          "iconName": "flat_color_brightness_3",
+          "id": "2d313751-d46f-4ead-9887-9e10da8c9498",
+          "name": "localhost:8000",
+          "responseHandling": {},
+          "url": "http://localhost:8000"
+        }
+      ]
+    }
+  ],
+  "compatibilityVersion": 71,
+  "version": 74
+}
