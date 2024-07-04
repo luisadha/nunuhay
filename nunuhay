@@ -11,7 +11,7 @@ import pandas as pd
 def main_menu():
     
     print(f"=====================================")
-    print(f"=====  NUNUHAY INVOICE RATTAN  ======")
+    print(f"=====  NUNUHAY RECEIPT RATTAN  ======")
     print(f"=====================================")
     print("Pilih tampilan invoice: ")
     print(" 1. Ubah ke tabel")
